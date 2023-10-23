@@ -21,21 +21,22 @@
       "url": "git+https://github.com/ruizavi/birdies.git"
    },
    "scripts": {
-      "prepublishOnly": "npm run testnbuild",
-      "prepare": "npm run testnbuild",
-      "testnbuild": "npm run test && npm run build",
+      "prepublishOnly": "npm run build:test",
+      "prepare": "husky install",
+      "build:test": "npm run lint:format && npm run test && npm run build",
       "dev": "vite",
       "preview": "vite preview",
       "build": "tsc && vite build",
       "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
       "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+      "lint:format": "npm run format && npm run lint",
       "test": "vitest run",
-      "wtest": "vitest",
+      "test:watch": "vitest",
       "coverage": "vitest run --coverage"
    },
    "peerDependencies": {
       "react": ">=16",
-      "react-com": ">=16"
+      "react-dom": ">=16"
    },
    "dependencies": {
       "classnames": "^2.3.2",
@@ -62,7 +63,9 @@
       "eslint-plugin-react-hooks": "^4.6.0",
       "eslint-plugin-react-refresh": "^0.4.3",
       "happy-dom": "^12.9.1",
+      "husky": "^8.0.0",
       "less": "^4.2.0",
+      "prettier": "^3.0.3",
       "typescript": "^5.0.2",
       "vite": "^4.4.5",
       "vite-plugin-dts": "^3.6.0",
@@ -79,5 +82,14 @@
    "files": [
       "dist",
       "README.md"
-   ]
+   ],
+   "lint-staged": {
+      "*.{js,jsx,less,md,json}": [
+         "prettier --write"
+      ],
+      "*.ts?(x)": [
+         "eslint --fix --quiet",
+         "prettier --parser=typescript --write"
+      ]
+   }
 }
