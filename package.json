@@ -1,19 +1,47 @@
 {
   "name": "birdies",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "main": "./dist/birdies.ums.cjs",
+  "module": "./dist/birdies.js",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": "Victor Ruiz (ruizavi)",
+  "description": "A React library of components",
+  "keywords": [
+    "react",
+    "typescript",
+    "components",
+    "simple"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ruizavi/birdies.git"
+  },
   "scripts": {
+    "prepublishOnly": "npm run testnbuild",
+    "prepare": "npm run testnbuild",
+    "testnbuild": "npm run test && npm run build",
     "dev": "vite",
+    "preview": "vite preview",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "test": "vitest run",
+    "wtest": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "classnames": "^2.3.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-com": ">=16"
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
@@ -34,5 +62,17 @@
     "vite": "^4.4.5",
     "vite-plugin-dts": "^3.6.0",
     "vitest": "^0.34.6"
-  }
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/birdies.js",
+      "require": "./dist/birdies.umd.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
 }
