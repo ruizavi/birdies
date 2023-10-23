@@ -1,78 +1,83 @@
 {
-  "name": "birdies",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "./dist/birdies.ums.cjs",
-  "module": "./dist/birdies.js",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "author": "Victor Ruiz (ruizavi)",
-  "description": "A React library of components",
-  "keywords": [
-    "react",
-    "typescript",
-    "components",
-    "simple"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ruizavi/birdies.git"
-  },
-  "scripts": {
-    "prepublishOnly": "npm run testnbuild",
-    "prepare": "npm run testnbuild",
-    "testnbuild": "npm run test && npm run build",
-    "dev": "vite",
-    "preview": "vite preview",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "test": "vitest run",
-    "wtest": "vitest",
-    "coverage": "vitest run --coverage"
-  },
-  "peerDependencies": {
-    "react": ">=16",
-    "react-com": ">=16"
-  },
-  "dependencies": {
-    "classnames": "^2.3.2",
-    "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@testing-library/react": "^14.0.0",
-    "@types/prop-types": "^15.7.9",
-    "@types/react": "^18.2.31",
-    "@types/react-dom": "^18.2.7",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react-swc": "^3.3.2",
-    "@vitest/coverage-v8": "^0.34.6",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
-    "happy-dom": "^12.9.1",
-    "less": "^4.2.0",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5",
-    "vite-plugin-dts": "^3.6.0",
-    "vitest": "^0.34.6"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/birdies.js",
-      "require": "./dist/birdies.umd.cjs",
-      "types": "./dist/index.d.ts"
-    },
-    "./dist/style.css": "./dist/style.css"
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ]
+   "name": "birdies",
+   "version": "1.0.0",
+   "type": "module",
+   "main": "./dist/birdies.ums.cjs",
+   "module": "./dist/birdies.js",
+   "publishConfig": {
+      "access": "public",
+      "registry": "https://registry.npmjs.org/"
+   },
+   "author": "Victor Ruiz (ruizavi)",
+   "description": "A React library of components",
+   "keywords": [
+      "react",
+      "typescript",
+      "components",
+      "simple"
+   ],
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/ruizavi/birdies.git"
+   },
+   "scripts": {
+      "prepublishOnly": "npm run testnbuild",
+      "prepare": "npm run testnbuild",
+      "testnbuild": "npm run test && npm run build",
+      "dev": "vite",
+      "preview": "vite preview",
+      "build": "tsc && vite build",
+      "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+      "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+      "test": "vitest run",
+      "wtest": "vitest",
+      "coverage": "vitest run --coverage"
+   },
+   "peerDependencies": {
+      "react": ">=16",
+      "react-com": ">=16"
+   },
+   "dependencies": {
+      "classnames": "^2.3.2",
+      "prop-types": "^15.8.1",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+   },
+   "devDependencies": {
+      "@testing-library/react": "^14.0.0",
+      "@types/prop-types": "^15.7.9",
+      "@types/react": "^18.2.31",
+      "@types/react-dom": "^18.2.7",
+      "@typescript-eslint/eslint-plugin": "^6.0.0",
+      "@typescript-eslint/parser": "^6.0.0",
+      "@vitejs/plugin-react-swc": "^3.3.2",
+      "@vitest/coverage-v8": "^0.34.6",
+      "eslint": "^8.45.0",
+      "eslint-config-prettier": "^9.0.0",
+      "eslint-config-standard-with-typescript": "^39.1.1",
+      "eslint-plugin-import": "^2.25.2",
+      "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+      "eslint-plugin-promise": "^6.0.0",
+      "eslint-plugin-react": "^7.33.2",
+      "eslint-plugin-react-hooks": "^4.6.0",
+      "eslint-plugin-react-refresh": "^0.4.3",
+      "happy-dom": "^12.9.1",
+      "less": "^4.2.0",
+      "typescript": "^5.0.2",
+      "vite": "^4.4.5",
+      "vite-plugin-dts": "^3.6.0",
+      "vitest": "^0.34.6"
+   },
+   "exports": {
+      ".": {
+         "import": "./dist/birdies.js",
+         "require": "./dist/birdies.umd.cjs",
+         "types": "./dist/index.d.ts"
+      },
+      "./dist/style.css": "./dist/style.css"
+   },
+   "files": [
+      "dist",
+      "README.md"
+   ]
 }
