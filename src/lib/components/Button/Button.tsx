@@ -4,6 +4,8 @@ import { COLORS, SIZES } from '../../utils/const';
 import { AsProps } from '../../utils/types';
 import propTypes from 'prop-types';
 
+import './Button.less';
+
 export interface ButtonProps extends AsProps<'button'>, React.HTMLAttributes<HTMLElement> {
    appearence?: 'solid' | 'border' | 'link';
    color?: COLORS;

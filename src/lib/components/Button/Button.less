@@ -1,0 +1,227 @@
+@import '../../styles/main.less';
+
+// Mixins
+.size(@height; @space-x; @font-size; @line-height) {
+   @space-y: ((@height - @line-height) / 2);
+
+   font-size: @font-size;
+   line-height: @line-height;
+   padding: @space-y @space-x;
+}
+
+.size-lg() {
+   .size(
+      @height: 42px;
+      @space-x: 16px;
+      @font-size: 18px;
+      @line-height: 20px;
+    );
+}
+
+.size-md() {
+   .size(
+      @height: 36px;
+      @space-x: 12px;
+      @font-size: 16px;
+      @line-height: 20px;
+    );
+}
+
+.size-sm() {
+   .size(
+      @height: 30px;
+      @space-x: 10px;
+      @font-size: 14px;
+      @line-height: 20px;
+    );
+}
+
+.size-xs() {
+   .size(
+      @height: 24px;
+      @space-x: 8px;
+      @font-size: 12px;
+      @line-height: 20px;
+    );
+}
+
+// Colors variable
+each(@spectrum, .(@color){
+   @C200: var(~'--bird-@{color}-200');
+   @C300: var(~'--bird-@{color}-300');
+   @C400: var(~'--bird-@{color}-400');
+   @C500: var(~'--bird-@{color}-500');
+   @C600: var(~'--bird-@{color}-600');
+   @C700: var(~'--bird-@{color}-700');
+   @C800: var(~'--bird-@{color}-800');
+   @C900: var(~'--bird-@{color}-900');
+ 
+   .bird-btn-@{color} {
+     --bird-btn-solid-bg: @C500;
+     --bird-btn-solid-hover-bg: @C700;
+     --bird-btn-solid-active-bg: @C800;
+ 
+     --bird-btn-border-border: @C500;
+     --bird-btn-border-text: @C500;
+     --bird-btn-border-hover-border: @C900;
+     --bird-btn-border-hover-text: @C800;
+     --bird-btn-border-active-border: @C900;
+     --bird-btn-border-active-text: @C900;
+ 
+     --bird-btn-link-text: @C500;
+     --bird-btn-link-hover-text: @C800;
+     --bird-btn-link-active-text: @C900;
+   }
+ });
+
+// Base class
+.bird-btn {
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+   color: white;
+   border-radius: 0.25rem;
+}
+
+// Appearence
+.bird-btn-solid {
+   border: none;
+   background-color: var(--bird-btn-solid-bg);
+   color: white;
+
+   &.bird-btn-disabled {
+      opacity: 0.3;
+   }
+
+   &.bird-btn-actived {
+      background-color: var(--bird-btn-solid-active-bg);
+   }
+
+   &:hover {
+      background-color: var(--bird-btn-solid-hover-bg);
+   }
+}
+
+.bird-btn-border {
+   color: var(--bird-btn-border-text);
+   background: none;
+   border: 1px solid var(--bird-btn-border-border);
+
+   &:hover {
+      border: 1px solid var(--bird-btn-border-hover-border);
+      color: var(--bird-btn-border-hover-text);
+   }
+
+   &.bird-btn-actived {
+      border: 1px solid var(--bird-btn-border-active-border);
+      color: var(--bird-btn-border-active-text);
+   }
+
+   &.bird-btn-disabled {
+      opacity: 0.5;
+   }
+
+   &.bird-btn-isLoading > span {
+      --c: no-repeat linear-gradient(var(--bird-btn-border-border) 0 0);
+   }
+}
+
+.bird-btn-link {
+   color: var(--bird-btn-link-text);
+   border: none;
+   background: none;
+   font-weight: bold;
+
+   &:hover {
+      color: var(--bird-btn-link-hover-text);
+   }
+
+   &.bird-btn-actived {
+      color: var(--bird-btn-link-active-text);
+   }
+
+   &.bird-btn-disabled {
+      opacity: 0.5;
+   }
+
+   &.bird-btn-isLoading > span {
+      --c: no-repeat linear-gradient(var(--bird-btn-link-text) 0 0);
+   }
+}
+
+// Size
+.bird-btn-xs {
+   .size-xs();
+}
+
+.bird-btn-sm {
+   .size-sm();
+}
+
+.bird-btn-md {
+   .size-md();
+}
+
+.bird-btn-lg {
+   .size-lg();
+}
+
+// Loader
+.bird-btn-isLoading {
+   & > span {
+      width: 1rem;
+      aspect-ratio: 1;
+      --c: no-repeat linear-gradient(white 0 0);
+      background:
+         var(--c) 0% 50%,
+         var(--c) 50% 50%,
+         var(--c) 100% 50%;
+      background-size: 20% 100%;
+      animation: loader 1s infinite linear;
+   }
+
+   &.bird-btn-block > span {
+      display: block;
+      margin: auto;
+   }
+}
+
+@keyframes loader {
+   0% {
+      background-size:
+         20% 100%,
+         20% 100%,
+         20% 100%;
+   }
+   33% {
+      background-size:
+         20% 10%,
+         20% 100%,
+         20% 100%;
+   }
+   50% {
+      background-size:
+         20% 100%,
+         20% 10%,
+         20% 100%;
+   }
+   66% {
+      background-size:
+         20% 100%,
+         20% 100%,
+         20% 10%;
+   }
+   100% {
+      background-size:
+         20% 100%,
+         20% 100%,
+         20% 100%;
+   }
+}
+
+// Button block
+.bird-btn-block {
+   display: block;
+   width: 100%;
+}
