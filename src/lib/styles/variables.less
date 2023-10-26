@@ -1,16 +1,16 @@
-@import './color.less';
+@import './colors.less';
 
 @spectrum: white, cream, deep, air, blue, red, pink, green, yellow, orange, purple;
 
 :root {
    each(@spectrum, .(@color){
       @color-name: @color;
-      --bird-@{color-name}-5: ~"@{@{color-name}-5}";
+      --bird-@{color-name}-50: ~"@{@{color-name}-50}";
       --bird-@{color-name}-950: ~"@{@{color-name}-950}";
 
     
       each(range(9), {
-        @level: @index * 10;
+        @level: @index * 100;
         --bird-@{color-name}-@{level}: ~"@{@{color-name}-@{level}}";
       });
     });
