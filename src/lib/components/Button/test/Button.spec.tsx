@@ -1,4 +1,3 @@
-import React from 'react';
 import { afterEach, describe, expect, test } from 'vitest';
 import { render, cleanup, screen } from '@testing-library/react';
 import Button from '../Button';
