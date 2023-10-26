@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import useClass from '../../utils/useClass';
 import { COLORS, SIZES } from '../../utils/const';
 import { AsProps } from '../../utils/types';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import './Button.less';
 
@@ -17,7 +17,7 @@ export interface ButtonProps extends AsProps<'button'>, React.HTMLAttributes<HTM
    isLoading?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props: ButtonProps, ref) => {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
    const {
       appearence = 'solid',
       color = 'green',
@@ -65,8 +65,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props: ButtonPr
 Button.displayName = 'Button';
 
 Button.propTypes = {
-   appearence: propTypes.oneOf(['solid', 'border', 'link']),
-   color: propTypes.oneOf([
+   appearence: PropTypes.oneOf(['solid', 'border', 'link']),
+   color: PropTypes.oneOf([
       'white',
       'cream',
       'deep',
@@ -79,13 +79,13 @@ Button.propTypes = {
       'orange',
       'purple'
    ]),
-   size: propTypes.oneOf(['xs', 'sm', 'md', 'lg']),
-   type: propTypes.oneOf(['submit', 'reset', 'button']),
-   disabled: propTypes.bool,
-   actived: propTypes.bool,
-   block: propTypes.bool,
-   isLoading: propTypes.bool,
-   children: propTypes.node
+   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
+   type: PropTypes.oneOf(['submit', 'reset', 'button']),
+   disabled: PropTypes.bool,
+   actived: PropTypes.bool,
+   block: PropTypes.bool,
+   isLoading: PropTypes.bool,
+   children: PropTypes.node
 };
 
 export default Button;

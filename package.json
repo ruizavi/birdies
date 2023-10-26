@@ -4,6 +4,7 @@
    "type": "module",
    "main": "./dist/birdies.ums.cjs",
    "module": "./dist/birdies.js",
+   "typings": "./dist/index.d.ts",
    "publishConfig": {
       "access": "public",
       "registry": "https://registry.npmjs.org/"
