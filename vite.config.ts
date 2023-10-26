@@ -9,7 +9,7 @@ export default defineConfig({
    plugins: [react(), dts({ rollupTypes: true })],
    build: {
       lib: {
-         entry: resolve('src', 'index.tsx'),
+         entry: resolve('src', 'lib', 'index.tsx'),
          name: 'birdies',
          formats: ['es', 'umd']
       }
