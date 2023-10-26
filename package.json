@@ -1,6 +1,6 @@
 {
    "name": "birdies",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "type": "module",
    "main": "./dist/birdies.ums.cjs",
    "module": "./dist/birdies.js",
@@ -34,15 +34,15 @@
       "test:watch": "vitest",
       "coverage": "vitest run --coverage"
    },
-   "peerDependencies": {
-      "react": ">=16",
-      "react-dom": ">=16"
-   },
    "dependencies": {
       "classnames": "^2.3.2",
       "prop-types": "^15.8.1",
       "react": "^18.2.0",
       "react-dom": "^18.2.0"
+   },
+   "peerDependencies": {
+      "react": ">=16.8.0",
+      "react-dom": ">=16.8.0"
    },
    "devDependencies": {
       "@commitlint/cli": "^18.0.0",
