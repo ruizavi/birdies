@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
-import Loader from '../Loader';
+import Loader from '../';
 
 describe('Loader component', () => {
    afterEach(cleanup);
