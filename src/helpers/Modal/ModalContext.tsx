@@ -32,11 +32,13 @@ export function ModalProvider({ children, modals }: PropsWithChildren<ModalProvi
    const [modal, setModal] = useState<ModalProperties | null>(null);
 
    function show<T = unknown>(id: string, props?: T) {
+      if (!store[id]) return;
+
       setModal({ id, props });
    }
 
    const register = (id: string, element: React.ElementType) => {
-      if (store[id] !== undefined) return;
+      if (store[id]) return;
 
       setStore({ ...store, [id]: element });
    };
@@ -52,7 +54,7 @@ export function ModalProvider({ children, modals }: PropsWithChildren<ModalProvi
 
       const SelectedModal = store[id];
 
-      return <SelectedModal props={props} />;
+      return <SelectedModal {...props} />;
    };
 
    return (
