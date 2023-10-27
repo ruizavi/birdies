@@ -4,6 +4,8 @@ import { AsProps } from '../../utils/types';
 import useClass from '../../utils/useClass';
 import propTypes from 'prop-types';
 
+import './Loader.less';
+
 export interface LoaderProps extends AsProps<'div'> {
    speed?: 'slow' | 'normal' | 'fast';
    size?: SIZES;

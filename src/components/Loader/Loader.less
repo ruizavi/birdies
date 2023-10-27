@@ -1,0 +1,168 @@
+@import '../../styles/main.less';
+@import './Animations.less';
+
+.bird-loader {
+   display: inline-block;
+}
+
+.bird-loader-center {
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+// Sizes
+.bird-loader-xs {
+   --HEIGHT: 16px;
+   --WIDTH: 16px;
+}
+
+.bird-loader-sm {
+   --HEIGHT: 22px;
+   --WIDTH: 22px;
+}
+
+.bird-loader-md {
+   --HEIGHT: 28px;
+   --WIDTH: 28px;
+}
+
+.bird-loader-lg {
+   --HEIGHT: 34px;
+   --WIDTH: 34px;
+}
+
+// Velocity
+.bird-loader-slow {
+   --DURATION: 1.25s;
+}
+
+.bird-loader-normal {
+   --DURATION: 1s;
+}
+
+.bird-loader-fast {
+   --DURATION: 0.75s;
+}
+
+// Colors
+each(@spectrum, .(@color){
+    @C200: var(~'--bird-@{color}-200');
+    @C300: var(~'--bird-@{color}-300');
+    @C400: var(~'--bird-@{color}-400');
+    @C500: var(~'--bird-@{color}-500');
+    @C600: var(~'--bird-@{color}-600');
+    @C700: var(~'--bird-@{color}-700');
+    @C800: var(~'--bird-@{color}-800');
+    @C900: var(~'--bird-@{color}-900');
+  
+    .bird-loader-@{color} {
+      --bird-loader-color-primary: @C500;
+      --bird-loader-color-secundary: @C700;
+      --bird-loader-color-terciary: @C800;
+    }
+  });
+
+// Types
+.bird-loader-bars {
+   span {
+      height: var(--HEIGHT);
+      width: var(--WIDTH);
+      display: block;
+      aspect-ratio: 1;
+      --bars: no-repeat linear-gradient(var(--bird-loader-color-primary) 0 0);
+      background:
+         var(--bars) 0% 50%,
+         var(--bars) 50% 50%,
+         var(--bars) 100% 50%;
+      background-size: 20% 100%;
+      animation: bars var(--DURATION) infinite linear;
+   }
+}
+
+.bird-loader-dots {
+   span {
+      display: block;
+      width: var(--WIDTH);
+      aspect-ratio: 4;
+      background: radial-gradient(circle closest-side, var(--bird-loader-color-primary) 90%, #0000)
+         0 / calc(100% / 3) 100% space;
+      clip-path: inset(0 100% 0 0);
+      animation: dots 1s steps(4) infinite;
+   }
+}
+
+.bird-loader-flip {
+   span {
+      width: var(--WIDTH);
+      aspect-ratio: 1;
+      display: grid;
+      grid: 50%/50%;
+      color: var(--bird-loader-color-primary);
+      --_g: no-repeat linear-gradient(currentColor 0 0);
+      background: var(--_g), var(--_g), var(--_g);
+      background-size: 50.1% 50.1%;
+      animation:
+         flip-1 var(--DURATION) infinite steps(1) alternate,
+         flip-1-1 calc(var(--DURATION) + var(--DURATION)) infinite steps(1);
+
+      &::before {
+         content: '';
+         background: currentColor;
+         transform: perspective(150px) rotateY(0deg) rotateX(0deg);
+         transform-origin: bottom right;
+         animation: flip-2 var(--DURATION) infinite linear alternate;
+      }
+   }
+}
+
+.bird-loader-lines {
+   span {
+      width: var(--WIDTH);
+      height: 16px;
+      display: grid;
+
+      &::after,
+      &::before {
+         content: '';
+         grid-area: 1/1;
+         --lines: no-repeat linear-gradient(#046d8b 0 0);
+         background: var(--lines), var(--lines), var(--lines);
+         animation:
+            lines-1 calc(var(--DURATION) + var(--DURATION)) infinite linear,
+            lines-2 calc(var(--DURATION) + var(--DURATION)) infinite linear;
+         transform: scale(var(--s, 1)) translate(3px, -3px);
+      }
+
+      &::after {
+         --s: -1;
+      }
+   }
+}
+
+.bird-loader-spinner {
+   span {
+      width: var(--WIDTH);
+      aspect-ratio: 1;
+      display: grid;
+      border: 2px solid white;
+      border-radius: 50%;
+      border-right-color: var(--bird-loader-color-primary);
+      animation: spinner 1s infinite linear;
+      &::after,
+      &::before {
+         content: '';
+         grid-area: 1/1;
+         margin: 2px;
+         border: inherit;
+         border-radius: 50%;
+         animation: spinner 2s infinite;
+      }
+
+      &::after {
+         margin: 2px;
+         animation-duration: 3s;
+      }
+   }
+}
