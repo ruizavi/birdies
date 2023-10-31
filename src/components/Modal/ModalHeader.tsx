@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AsProps } from '../../utils/types';
 import useClass from '../../utils/useClass';
+import ModalContext from './ModalContext';
 
 export interface ModalHeaderProps extends AsProps<'header'>, React.HTMLAttributes<HTMLElement> {
    classPrefix?: string;
-   handleClose?: () => void;
 }
 
 const ModalHeader = React.forwardRef<HTMLHeadElement, ModalHeaderProps>((props, ref) => {
@@ -14,7 +14,6 @@ const ModalHeader = React.forwardRef<HTMLHeadElement, ModalHeaderProps>((props, 
       as = 'header',
       className,
       children,
-      handleClose,
       ...rest
    } = props;
 
@@ -24,10 +23,12 @@ const ModalHeader = React.forwardRef<HTMLHeadElement, ModalHeaderProps>((props, 
 
    const Component = as || 'header';
 
+   const modalContext = useContext(ModalContext);
+
    return (
       <Component {...rest} role={role} className={classes} ref={ref}>
          {children}
-         <button onClick={handleClose}>x</button>
+         <button onClick={modalContext?.onModalClose}>x</button>
       </Component>
    );
 });

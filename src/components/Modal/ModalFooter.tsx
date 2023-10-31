@@ -3,11 +3,18 @@ import { AsProps } from '../../utils/types';
 import useClass from '../../utils/useClass';
 
 export interface ModalFooterProps extends AsProps<'footer'>, React.HTMLAttributes<HTMLElement> {
-   classPrefix: string;
+   classPrefix?: string;
 }
 
 const ModalFooter = React.forwardRef<HTMLHeadingElement, ModalFooterProps>((props, ref) => {
-   const { role, classPrefix = 'modal-footer', as, className, children, ...rest } = props;
+   const {
+      role,
+      classPrefix = 'modal-footer',
+      as = 'footer',
+      className,
+      children,
+      ...rest
+   } = props;
 
    const { addClassPrefix, merge } = useClass(classPrefix);
 

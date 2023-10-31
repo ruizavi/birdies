@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { SIZES } from '../../utils/const';
 import { AsProps } from '../../utils/types';
 import useClass from '../../utils/useClass';
-import { ModalBodyProps } from './ModalBody';
-import { ModalFooterProps } from './ModalFooter';
-import { ModalHeaderProps } from './ModalHeader';
-import { ModalTitleProps } from './ModalTitle';
+import ModalContext, { ModalContextProps } from './ModalContext';
 
 export interface ModalProps extends AsProps<'div'>, React.HTMLAttributes<HTMLElement> {
    size?: SIZES | 'full';
-   handleClose?: () => void;
+   onModalClose?: (e: React.MouseEvent) => void;
 }
 
 const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
@@ -20,7 +17,7 @@ const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
       role = 'dialog',
       prefix = 'modal',
       size = 'lg',
-      handleClose,
+      onModalClose,
       ...rest
    } = props;
 
@@ -30,37 +27,14 @@ const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
 
    const Component = as || 'div';
 
-   const renderModal = () => {
-      return (
-         <>
-            {React.Children.map(children, child => {
-               if (React.isValidElement<ModalHeaderProps>(child)) {
-                  return React.cloneElement(child, {
-                     as: 'header',
-                     classPrefix: 'modal-header',
-                     handleClose
-                  });
-               }
-               if (React.isValidElement<ModalTitleProps>(child)) {
-                  return React.cloneElement(child, { as: 'h4', classPrefix: 'modal-title' });
-               }
-               if (React.isValidElement<ModalBodyProps>(child)) {
-                  return React.cloneElement(child, { as: 'main', classPrefix: 'modal-main' });
-               }
-               if (React.isValidElement<ModalFooterProps>(child)) {
-                  return React.cloneElement(child, { as: 'footer', classPrefix: 'modal-footer' });
-               }
-
-               return child;
-            })}
-         </>
-      );
-   };
+   const modalContextProps = useMemo<ModalContextProps>(() => ({ onModalClose }), [onModalClose]);
 
    return (
-      <Component {...rest} ref={ref} className={classes} role={role}>
-         {renderModal()}
-      </Component>
+      <ModalContext.Provider value={modalContextProps}>
+         <Component {...rest} ref={ref} className={classes} role={role}>
+            {children}
+         </Component>
+      </ModalContext.Provider>
    );
 });
 

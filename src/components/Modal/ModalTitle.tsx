@@ -3,11 +3,11 @@ import { AsProps } from '../../utils/types';
 import useClass from '../../utils/useClass';
 
 export interface ModalTitleProps extends AsProps<'h4'>, React.HTMLAttributes<HTMLElement> {
-   classPrefix: string;
+   classPrefix?: string;
 }
 
 const ModalTitle = React.forwardRef<HTMLHeadingElement, ModalTitleProps>((props, ref) => {
-   const { role, classPrefix = 'modal-title', as, className, children, ...rest } = props;
+   const { role, classPrefix = 'modal-title', as = 'h4', className, children, ...rest } = props;
 
    const { addClassPrefix, merge } = useClass(classPrefix);
 
