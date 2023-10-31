@@ -6,6 +6,7 @@ import ModalContext, { ModalContextProps } from './ModalContext';
 
 export interface ModalProps extends AsProps<'div'>, React.HTMLAttributes<HTMLElement> {
    size?: SIZES | 'full';
+   open?: boolean;
    onModalClose?: (e: React.MouseEvent) => void;
 }
 
@@ -17,6 +18,7 @@ const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
       role = 'dialog',
       prefix = 'modal',
       size = 'lg',
+      open,
       onModalClose,
       ...rest
    } = props;
@@ -29,13 +31,19 @@ const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
 
    const modalContextProps = useMemo<ModalContextProps>(() => ({ onModalClose }), [onModalClose]);
 
-   return (
+   const render = () => (
       <ModalContext.Provider value={modalContextProps}>
          <Component {...rest} ref={ref} className={classes} role={role}>
             {children}
          </Component>
       </ModalContext.Provider>
    );
+
+   if (open != null) {
+      return open ? render() : null;
+   }
+
+   return render();
 });
 
 ModalBase.displayName = 'Modal';
