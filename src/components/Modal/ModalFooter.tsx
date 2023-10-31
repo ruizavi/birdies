@@ -26,6 +26,6 @@ const ModalFooter = React.forwardRef<HTMLHeadingElement, ModalFooterProps>((prop
    );
 });
 
-ModalFooter.displayName = 'Modal-Title';
+ModalFooter.displayName = 'Modal-Footer';
 
 export default ModalFooter;

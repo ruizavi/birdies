@@ -26,6 +26,6 @@ const ModalBody = React.forwardRef<HTMLHeadingElement, ModalBodyProps>((props, r
    );
 });
 
-ModalBody.displayName = 'Modal-Title';
+ModalBody.displayName = 'Modal-Body';
 
 export default ModalBody;
