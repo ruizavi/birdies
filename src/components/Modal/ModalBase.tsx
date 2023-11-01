@@ -3,11 +3,12 @@ import { SIZES } from '../../utils/const';
 import { AsProps } from '../../utils/types';
 import useClass from '../../utils/useClass';
 import ModalContext, { ModalContextProps } from './ModalContext';
+import ModalContainer from './ModalContainer';
 
 export interface ModalProps extends AsProps<'div'>, React.HTMLAttributes<HTMLElement> {
    size?: SIZES | 'full';
    open?: boolean;
-   onModalClose?: (e: React.MouseEvent) => void;
+   onModalClose?: (e?: React.MouseEvent) => void;
 }
 
 const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
@@ -33,9 +34,11 @@ const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
 
    const render = () => (
       <ModalContext.Provider value={modalContextProps}>
-         <Component {...rest} ref={ref} className={classes} role={role}>
-            {children}
-         </Component>
+         <ModalContainer>
+            <Component {...rest} ref={ref} className={classes} role={role}>
+               {children}
+            </Component>
+         </ModalContainer>
       </ModalContext.Provider>
    );
 
