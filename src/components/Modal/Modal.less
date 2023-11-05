@@ -1,0 +1,125 @@
+@import '../../styles/main.less';
+
+.bird-modal-container {
+   background-color: rgba(#000, 0.4);
+   box-sizing: border-box;
+   height: 100vh;
+   left: 0;
+   opacity: 0.75;
+   overflow: hidden;
+   position: absolute;
+   top: 0;
+   width: 100vw;
+   animation: open-container 1s none;
+   &.bird-modal-container-isHidden {
+      animation: close-container 1s none;
+      & > .bird-modal {
+         animation: close 1s;
+      }
+   }
+
+   & > .bird-modal {
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      border: 1px solid var(--bird-white-600);
+      border-radius: 1rem;
+      position: relative;
+      top: 15%;
+      left: 50%;
+      transform: translate(-50%, -15%);
+      animation: open 600ms;
+      width: var(--width);
+      max-height: calc(100vh - 20%);
+      overflow-y: hidden;
+      & > .bird-modal-header {
+         padding: 0 1rem;
+         box-sizing: border-box;
+         height: 50px;
+         display: flex;
+         align-items: center;
+         border-bottom: 1px solid var(--bird-white-400);
+         button {
+            margin: 0 0 0 auto;
+            background: none;
+            border: none;
+            cursor: pointer;
+         }
+      }
+
+      & > .bird-modal-body {
+         padding: 16px 16px;
+         overflow-y: scroll;
+      }
+
+      & > .bird-modal-footer {
+         min-height: 50px;
+         max-height: 50px;
+         padding: 0 1rem;
+      }
+   }
+}
+
+.bird-modal-lg {
+   --width: 55%;
+}
+.bird-modal-xs {
+   --width: 25%;
+}
+.bird-modal-sm {
+   --width: 35%;
+}
+.bird-modal-md {
+   --width: 45%;
+}
+.bird-modal-full {
+   --width: 75%;
+}
+
+@keyframes open {
+   from {
+      top: 15%;
+      left: 50%;
+      opacity: 0;
+      transform: translate(-50%, -15%) scale(0.75);
+   }
+   to {
+      top: 15%;
+      left: 50%;
+      opacity: 1;
+      transform: translate(-50%, -15%) scale(1);
+   }
+}
+
+@keyframes close {
+   from {
+      top: 15%;
+      left: 50%;
+      opacity: 1;
+      transform: translate(-50%, -15%) scale(1);
+   }
+   to {
+      top: 15%;
+      left: 50%;
+      opacity: 0;
+      transform: translate(-50%, -15%) scale(0.75);
+   }
+}
+
+@keyframes open-container {
+   from {
+      opacity: 0;
+   }
+   to {
+      opacity: 0.75;
+   }
+}
+
+@keyframes close-container {
+   from {
+      opacity: 0.75;
+   }
+   to {
+      opacity: 0;
+   }
+}

@@ -5,6 +5,8 @@ import ModalTitle from './ModalTitle';
 import ModalBody from './ModalBody';
 import ModalFooter from './ModalFooter';
 
+import './Modal.less';
+
 interface ModalComponent
    extends React.ForwardRefExoticComponent<ModalProps & React.RefAttributes<HTMLDivElement>> {
    Header: typeof ModalHeader;

@@ -3,14 +3,16 @@ import { AsProps } from '../../utils/types';
 import useClass from '../../utils/useClass';
 import ModalContext from './ModalContext';
 
-export interface ModalContainerProps extends AsProps<'div'>, React.HTMLAttributes<HTMLElement> {}
+export interface ModalContainerProps extends AsProps<'div'>, React.HTMLAttributes<HTMLElement> {
+   isHidden: boolean;
+}
 
 const ModalContainer = React.forwardRef<HTMLDivElement, ModalContainerProps>((props, ref) => {
-   const { as, children, role, className, prefix = 'modal-container', ...rest } = props;
+   const { as, children, role, className, isHidden, prefix = 'modal-container', ...rest } = props;
 
    const { addClassPrefix, merge } = useClass(prefix);
 
-   const classes = merge(className, addClassPrefix());
+   const classes = merge(className, addClassPrefix({ isHidden }));
 
    const modalContext = useContext(ModalContext);
 
