@@ -8,7 +8,7 @@ import ModalContainer from './ModalContainer';
 export interface ModalProps extends AsProps<'div'>, React.HTMLAttributes<HTMLElement> {
    size?: SIZES | 'full';
    open?: boolean;
-   onModalClose: (e?: React.MouseEvent) => void;
+   onModalClose?: (e?: React.MouseEvent) => void;
 }
 
 const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
@@ -37,7 +37,9 @@ const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
          onModalClose: () => {
             setIsHidden(true);
             setTimeout(() => {
-               onModalClose();
+               if (onModalClose) {
+                  onModalClose();
+               }
                setIsHidden(false);
             }, 998);
          }
