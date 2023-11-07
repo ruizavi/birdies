@@ -1,0 +1,71 @@
+name: Release versions
+
+on:
+   push:
+      branches: [main]
+   pull_request:
+      branches: [main]
+
+jobs:
+   avoid_redundance:
+      runs-on: ubuntu-20.04
+      steps:
+         - name: Cancel previous builds
+           uses: styfle/cancel-workflow-action@0.6.0
+           with:
+              access_token: ${{ github.token }}
+   testing:
+      runs-on: ubuntu-20.04
+      steps:
+         - uses: actions/checkout@v4
+           with:
+              fetch-depth: 0
+         - uses: oven-sh/setup-bun@v1
+           with:
+              bun-version: latest
+         - name: 'Install dependencies'
+           run: 'bun i'
+         - uses: actions/setup-node@v3
+           with:
+              node_version: '20.8.0'
+         - name: 'Run tests'
+           run: 'npm run test'
+   deploy:
+      needs: [testing]
+      if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+      runs-on: ubuntu-20.04
+      steps:
+         - uses: actions/checkout@v4
+           with:
+              fetch-depth: 0
+         - uses: oven-sh/setup-bun@v1
+           with:
+              bun-version: latest
+         - name: 'Install dependencies'
+           run: 'bun i'
+         - uses: actions/setup-node@v3
+           with:
+              node_version: '20.8.0'
+         - name: 'Deploy in npm'
+           run: 'npm publish'
+           env:
+              NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+   release:
+      needs: [testing]
+      if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+      runs-on: ubuntu-20.04
+      steps:
+         - uses: actions/checkout@v2
+         - name: 'Bump version and push tag'
+           id: tag_version
+           uses: mathieudutour/github-tag-action@v6.1
+           with:
+              github_token: ${{ github.token }}
+         - name: get-npm-version
+           id: package-version
+           uses: martinbeentjes/npm-get-version-action@v1.3.1
+         - name: 'Create a GitHub release'
+           uses: ncipollo/release-action@v1
+           with:
+              tag: v${{ steps.package-version.outputs.current-version }}
+              name: Release ${{ steps.package-version.outputs.current-version }}
