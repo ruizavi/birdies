@@ -51,18 +51,4 @@ jobs:
            run: 'npm publish'
            env:
               NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-   release:
-      needs: [testing]
-      if: github.event_name == 'push'
-      runs-on: ubuntu-20.04
-      steps:
-         - uses: actions/checkout@v2
-         - name: get-npm-version
-           id: package-version
-           uses: martinbeentjes/npm-get-version-action@v1.3.1
-         - name: 'Create a GitHub release'
-           uses: avakar/tag-and-release@v1
-           with:
-              tag_name: ${{ steps.package-version.outputs.current-version }}
-           env:
-              GITHUB_TOKEN: ${{ github.token }}
+
