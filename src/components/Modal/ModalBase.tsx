@@ -4,7 +4,7 @@ import { AsProps } from '../../utils/types';
 import useClass from '../../utils/useClass';
 import ModalContext, { ModalContextProps } from './ModalContext';
 import ModalContainer from './ModalContainer';
-
+import PropTypes from 'prop-types';
 export interface ModalProps extends AsProps<'div'>, React.HTMLAttributes<HTMLElement> {
    size?: SIZES | 'full';
    open?: boolean;
@@ -35,13 +35,11 @@ const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
    const modalContextProps = useMemo<ModalContextProps>(
       () => ({
          onModalClose: () => {
-            setIsHidden(true);
+            setIsHidden(!isHidden);
             setTimeout(() => {
-               if (onModalClose) {
-                  onModalClose();
-               }
-               setIsHidden(false);
-            }, 998);
+               if (onModalClose) onModalClose();
+               setIsHidden(!isHidden);
+            }, 900);
          }
       }),
       [onModalClose]
@@ -65,5 +63,10 @@ const ModalBase = React.forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
 });
 
 ModalBase.displayName = 'Modal';
+ModalBase.propTypes = {
+   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'full']),
+   open: PropTypes.bool,
+   onModalClose: PropTypes.func
+};
 
 export default ModalBase;
