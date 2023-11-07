@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ModalContext } from '../ModalContext';
+import { PortalContext } from '../PortalContext';
 
 export type TestProps = {
    id: number;
@@ -12,13 +12,13 @@ export function ModalTest({ id }: TestProps) {
 }
 
 export function ContextTest() {
-   const { show, hide } = useContext(ModalContext);
+   const { showModal, hideModal } = useContext(PortalContext);
 
    return (
       <div>
          <p>testing</p>
-         <button onClick={() => show<TestProps>(MODAL_ID, props)}>show</button>
-         <button onClick={() => hide()}>hide</button>
+         <button onClick={() => showModal<TestProps>(MODAL_ID, props)}>show</button>
+         <button onClick={() => hideModal()}>hide</button>
       </div>
    );
 }

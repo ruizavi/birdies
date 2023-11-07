@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { afterEach, describe, expect, test } from 'vitest';
-import { ModalProvider } from '../ModalContext';
+import { PortalProvider } from '../PortalContext';
 import { ContextTest, MODAL_ID, ModalTest, props } from './TestComponent';
 
 describe('Modal context', () => {
@@ -9,9 +9,9 @@ describe('Modal context', () => {
 
    test('render children', async () => {
       render(
-         <ModalProvider modals={{}}>
+         <PortalProvider modals={{}}>
             <p>Testing</p>
-         </ModalProvider>
+         </PortalProvider>
       );
 
       const modalElement = screen.getByText('Testing');
@@ -21,9 +21,9 @@ describe('Modal context', () => {
 
    test('should show and hide modal', async () => {
       render(
-         <ModalProvider modals={{ [MODAL_ID]: ModalTest }}>
+         <PortalProvider modals={{ [MODAL_ID]: ModalTest }}>
             <ContextTest />
-         </ModalProvider>
+         </PortalProvider>
       );
       const textFind = `Modal ${props.id}`;
 
