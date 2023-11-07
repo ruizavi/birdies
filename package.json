@@ -1,6 +1,6 @@
 {
    "name": "birdies",
-   "version": "1.4.6",
+   "version": "1.4.7",
    "type": "module",
    "main": "./dist/birdies.ums.cjs",
    "module": "./dist/birdies.js",
