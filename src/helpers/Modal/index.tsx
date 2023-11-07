@@ -1,5 +1,5 @@
-import { ModalProvider } from './ModalContext';
+import { ModalProvider, ModalElement, ModalContextState } from './ModalContext';
 import useModal from './useModal';
 
-export { type ModalElement } from './ModalContext';
+export type { ModalElement, ModalContextState };
 export { ModalProvider, useModal };

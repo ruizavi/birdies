@@ -9,7 +9,7 @@ interface ModalProperties {
    props?: any;
 }
 
-interface ModalContextState {
+export interface ModalContextState {
    show: <T = unknown>(id: string, props?: T) => void;
    hide: () => void;
    register: (id: string, element: React.ElementType) => void;
