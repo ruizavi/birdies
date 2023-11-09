@@ -5,7 +5,7 @@
    box-sizing: border-box;
    height: 100vh;
    left: 0;
-   opacity: 0.75;
+   z-index: 20;
    overflow: hidden;
    position: absolute;
    top: 0;
@@ -111,13 +111,13 @@
       opacity: 0;
    }
    to {
-      opacity: 0.75;
+      opacity: 1;
    }
 }
 
 @keyframes close-container {
    from {
-      opacity: 0.75;
+      opacity: 1;
    }
    to {
       opacity: 0;
